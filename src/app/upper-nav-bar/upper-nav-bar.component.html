@@ -1,0 +1,19 @@
+
+<ul class="nav navbar-light bg-light" >
+    <a class="navbar-brand">PetThing</a>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/home">home</a>
+      </li> 
+
+    <li class="nav-item" *ngFor= "let cate of categories">
+        <a class="nav-link"  [routerLink]="[cate]">{{cate}}</a>
+    </li>
+
+    <li class="nav-item">
+       <a class="nav-link" routerLink="/account">Account</a>
+    </li> 
+  
+
+  </ul>
+
+  <!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->

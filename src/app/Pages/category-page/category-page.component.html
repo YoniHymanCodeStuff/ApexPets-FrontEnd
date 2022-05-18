@@ -1,0 +1,7 @@
+<ul *ngIf="category">
+    <li *ngFor ="let item of items">
+        <a [routerLink]=[item.Id]>{{item.Id}}. {{item.genus}}</a>
+        <!-- prob there is a way to use
+             routerlink and interact fro parent to child... -->
+    </li>
+</ul>
