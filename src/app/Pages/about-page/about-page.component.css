@@ -1,0 +1,28 @@
+.cover-img{
+    width: 70vw;
+    object-fit: contain;
+}
+
+.flex-child{
+
+    flex-grow: 1;
+}
+
+.outer-cont{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+
+.about-text{
+
+    width: 70vw;
+
+}
+
+.about-text-end{
+    text-align: center;
+}

@@ -1,0 +1,106 @@
+<div class="dataHeader">
+    <h3>Product Data</h3>
+</div>
+
+
+
+<div class="input-group">
+
+    <input #searchBar type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+        aria-describedby="search-addon" (click)="ClearSearch(searchBar.value)" />
+
+    <button type="button" class="btn btn-outline-primary" (click)="FireSearch(searchBar.value)">search</button>
+</div>
+
+<div class="newButton">
+    <button class="btn btn-primary " mat-button (click)="AddRow()">Add New Product</button>
+</div>
+<table mat-table [dataSource]="animals" class="table table-striped" matSort (matSortChange)="SortChange($event)">
+    <ng-container *ngFor="let col of tableSchema" [matColumnDef]="col.key">
+
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="{{col.label}}">
+            {{col.label}}
+        </th>
+
+
+        <td mat-cell *matCellDef="let element">
+
+            <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
+                <div class="btn-edit" *ngSwitchCase="'isEdit'">
+                    <button class="btn btn-primary" (click)="element.isEdit = !element.isEdit">Edit</button>
+
+
+                    <button mat-button class="btn btn-warning" (click)="ArchiveAnimal(element.id)">
+                        Archive
+                    </button>
+
+                    <button mat-button class="btn btn-danger" (click)="DeleteAnimal(element.id)">
+                        Delete
+                    </button>
+                </div>
+                <span *ngSwitchDefault>
+                    {{ element[col.key] }}
+                </span>
+            </div>
+
+
+            <div *ngIf="element.isEdit">
+                <div class="btn-edit" *ngIf="col.key === 'isEdit'; else dataField">
+                    <button class="btn btn-success"
+                        (click)="updateItem(element); element.isEdit = !element.isEdit">Done</button>
+                </div>
+
+                <ng-template #dataField>
+                    <mat-form-field *ngIf="col.key !=='category'">
+                        <input [type]="col.type" matInput [(ngModel)]="element[col.key]" />
+                    </mat-form-field>
+
+                    <div *ngIf="col.key ==='category'" class="btn-group" dropdown>
+                        <button id="button-animated" dropdownToggle type="button"
+                            class="btn btn-secondary dropdown-toggle" aria-controls="dropdown-animated">
+                            {{element[col.key]}} <span class="caret"></span>
+                        </button>
+
+                        <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu"
+                            aria-labelledby="button-animated">
+
+                            <div *ngFor="let cate of categories">
+                                <label class="form-check-label" for="category_selected_{{cate}}">
+                                    <input id="category_selected_{{cate}}" mat-radio class="form-check-input"
+                                        type="radio" value={{cate}} name="categ" [(ngModel)]="element[col.key]">
+
+                                    {{cate}}
+                                </label>
+
+                            </div>
+                            <label>Add new category:</label>
+                            <input matInput type="text" [(ngModel)]="element[col.key]">
+                        </ul>
+                    </div>
+
+
+
+                </ng-template>
+            </div>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div *ngIf="animals?.length == 0" style="color:yellow; background-color: gray;">there are no results that match
+    "{{queryParams.SearchString}}"</div>
+
+<mat-paginator *ngIf="pagination" [pageSize]="pagination.itemsPerPage" [length]="pagination.totalItems"
+    [pageIndex]="pagination.currentPage - 1" [pageSizeOptions]="[5,10,20]" (page)="pageChanged($event)"></mat-paginator>
+<div class="info">
+    <div class="info-inner">
+        <h5 class="text-warning">Archive -</h5>
+        <h6> Removes product from the website, but the product info remains in the database</h6>
+    </div>
+    <div class="info-inner">
+        <h5 class="text-danger">Delete -</h5>
+        <h6> Completely and irreversibly deletes product and all orders that refer to it from website and database.
+        </h6>
+    </div>
+</div>

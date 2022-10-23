@@ -1,0 +1,34 @@
+<div class="mainContainer">
+
+  <div class="titleArea">
+    <h4>Shopping cart</h4>
+  </div>
+
+  <ul class="nav-cards" >
+    
+    <li class="nav-card" *ngFor="let item of CartAnimals">
+      <div class="card border-primary">
+        <div class="card-body">
+          <h5 class="card-title">cart item:{{item.cartItemId}}</h5>
+          <p class="card-text">
+            Ordered animal: {{item.name}}<br>
+            product id: {{item.animalId}}<br>
+            Price: {{item.price|currency}}
+          </p>
+          <a type="button" class="btn btn-warning" (click)="RemoveItem(item)">Remove from cart</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div class="checkoutArea">
+<p *ngIf="CartAnimals && CartAnimals.length===0">your cart is empty</p>
+<p>Total items:{{CartAnimals.length}}</p>
+<p>Total price: {{totalPrice|currency}}</p>
+
+<button type="button" class="btn btn-success" [disabled]="CartAnimals && CartAnimals.length===0" (click)="Checkout()">
+  Checkout
+</button>
+</div>
+</div>
+

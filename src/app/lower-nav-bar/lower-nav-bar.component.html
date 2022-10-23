@@ -1,1 +1,37 @@
-<p>lower-nav-bar works!</p>
+<nav class="navbar navbar-expand-sm bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home"><img
+        src="https://res.cloudinary.com/storage-for-demo-apps/image/upload/v1662019990/beast_logo_ldjmkz.png"
+        class="logo">Apex Pets</a>
+
+    <button class="navbar-toggler btn-primary" type="button" (click)="collapse.toggle()">
+      <span class="fa fa-bars"></span>
+    </button>
+    <ngx-navbar-collapse #collapse="ngxNavbarCollapse">
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contact"><i class="fa fa-envelope"></i>Contact</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about"><i class="fa fa-leanpub"></i>About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/"><a class="fa fa-twitter"></a></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://facebook.com/"><a class="fa fa-facebook"></a></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://instagram.com/"><a class="fa fa-instagram"></a></a>
+        </li>
+
+      </ul>
+      <ng-container class="d-flex me-sm-2">
+        <p class="fa fa-solid fa-copyright">apex pets ltd, 2022 </p>
+      </ng-container>
+
+    </ngx-navbar-collapse>
+  </div>
+</nav>

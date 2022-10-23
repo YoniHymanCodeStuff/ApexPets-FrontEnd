@@ -1,0 +1,16 @@
+<div class="outerCont">
+<form class="card border-primary" [formGroup]="AddAdminForm"(ngSubmit)="TryRegister()">
+
+           <h4 class="text-center">Create New Admin</h4>     
+    <app-text-input formControlName="username" label="username"></app-text-input>
+    <app-text-input formControlName="password" label="password" [IsPassword]="true" type="password" ></app-text-input>
+    <app-text-input formControlName="confirmPassword" label="password confirmation" [IsPassword]="true"  type="password" ></app-text-input>
+
+
+  <div class="d-flex justify-content-center">
+    <button type="button"
+      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" type="submit" [disabled]="AddAdminForm.invalid">Create</button>
+  </div>
+
+</form>
+</div>

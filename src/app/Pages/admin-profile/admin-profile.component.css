@@ -1,0 +1,15 @@
+.container{
+    width:100%;
+    display: flex;
+    justify-content:center;
+    padding:1rem;
+
+  }
+
+  .admin-profile{
+    display: flex;
+    width:fit-content;
+    padding:1rem;
+    margin-top: 1rem;
+    align-items: center;
+  }

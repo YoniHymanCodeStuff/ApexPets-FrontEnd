@@ -1,0 +1,10 @@
+
+<div *ngIf="EditMode">
+  <app-edit-profile [customer]="customer" 
+  (customerChange)="UpdateCustomerData($event)" 
+  (editMode)="toggleEditMode($event)"></app-edit-profile>
+</div>
+
+<div *ngIf="!EditMode">
+  <app-view-profile [customer]="customer"  (editMode)="toggleEditMode($event)"></app-view-profile>
+</div>

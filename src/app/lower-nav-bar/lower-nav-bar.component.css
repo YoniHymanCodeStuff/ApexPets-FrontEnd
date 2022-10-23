@@ -1,0 +1,16 @@
+.logo{
+    border-radius: 50%;
+    height: 30px;
+}
+
+
+.navbar{
+   
+    bottom: 0;
+    width: 100%;
+    
+    position:fixed;
+    z-index: 10;
+
+    
+}

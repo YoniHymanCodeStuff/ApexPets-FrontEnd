@@ -1,0 +1,58 @@
+.cards-holder{
+    margin-top: 50px;
+  }
+
+.card{
+    max-height:35vh;
+    width: 40vw;
+    object-fit: cover;   
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: min-content min-content;
+    gap:5vh;
+    margin-bottom: 100px;
+  }
+  .grid-item {
+    
+    
+    align-self: center;
+    justify-self: center;
+    height:100%;
+    
+    text-align: left;
+    
+  }
+
+  .card-img{
+    object-fit: cover;
+    max-height:35vh;
+  }
+
+  .crest-img{
+    border-radius: 50%;
+    height: 15vh;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-bottom: 1vh;
+  }
+
+  .logo-crest{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5vh;
+  }
+
+  h2{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 4vh;
+  }
+
+  h3{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.5vh;
+  }

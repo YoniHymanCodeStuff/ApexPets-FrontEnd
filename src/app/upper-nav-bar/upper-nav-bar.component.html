@@ -1,19 +1,48 @@
+<nav ngxNavbarDynamicExpand class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home">
+      <img src="https://res.cloudinary.com/storage-for-demo-apps/image/upload/v1662019990/beast_logo_ldjmkz.png"
+        class="logo">Apex Pets</a>
 
-<ul class="nav navbar-light bg-light" >
-    <a class="navbar-brand">PetThing</a>
-    <li class="nav-item">
-        <a class="nav-link" routerLink="/home">home</a>
-      </li> 
+    <button class="navbar-toggler" type="button" (click)="collapse.toggle()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <li class="nav-item" *ngFor= "let cate of categories">
-        <a class="nav-link"  [routerLink]="[cate]">{{cate}}</a>
-    </li>
+    <ngx-navbar-collapse #collapse="ngxNavbarCollapse">
 
-    <li class="nav-item">
-       <a class="nav-link" routerLink="/account">Account</a>
-    </li> 
-  
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">home</a>
+        </li>
 
-  </ul>
+        <li class="nav-item" *ngFor="let cate of categories">
+          <a class="nav-link" [routerLink]="['animals/'+ cate]">{{cate}}</a>
+        </li>
 
-  <!-- https://getbootstrap.com/docs/4.0/components/navbar/ -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/about">About us</a>
+        </li>
+
+        <ng-container *ngIf="user?.isAdmin">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/data-editor">Data Editor</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/order-manager">Order Manager</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/Add-Admin"><i class="fa fa-user-plus"></i>Add Admin</a>
+          </li>
+        </ng-container>
+
+ 
+        <app-login-form></app-login-form>
+
+      </ul>
+
+    </ngx-navbar-collapse>
+  </div>
+</nav>
+

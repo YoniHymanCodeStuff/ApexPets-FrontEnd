@@ -1,0 +1,50 @@
+<div *ngIf="currentAnimal">
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+
+                <div class="col-md-6">
+                    <img class="card-img-top mb-5 mb-md-0" *ngIf="currentAnimal.mainPhoto"
+                        src={{currentAnimal.mainPhoto.photoUrl}} alt="hasmainphoto" />
+                    <img class="card-img-top mb-5 mb-md-0" *ngIf="!currentAnimal.mainPhoto"
+                        src={{currentAnimal.images[0].photoUrl}} alt="doesn't have" />
+                </div>
+                <div class="col-md-6">
+                    <div class="small mb-1">product id: {{currentAnimal.id}}</div>
+                    <h2 class="display-5 fw-bolder">{{currentAnimal.name}}</h2>
+                    <h5>{{currentAnimal.species}}</h5>
+                    <div class="fs-5 mb-5">
+
+                        <span>{{currentAnimal.price|currency}}</span>
+                    </div>
+                    <h5>About</h5>
+                    <p>{{currentAnimal.description}}</p>
+                    <h5>Required habitat</h5>
+                    <p>{{currentAnimal.required_Habitat}}</p>
+                    <div class="d-flex">
+                        <button class="btn btn-primary" type="button" (click)="AddToCart()" [disabled]="user===null">
+                            <i class="fa fa-shopping-cart"></i>
+                            Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- Gallery section-->
+    <section class="bg-light ">
+        <div class="animal-gallery container">
+            <h2 class="fw-bolder mb-4">Gallery</h2>
+
+            <div class="images-container">
+                <div *ngFor="let img of currentAnimal.images">
+                    <img class="collection-img" src="{{img.photoUrl}}">
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

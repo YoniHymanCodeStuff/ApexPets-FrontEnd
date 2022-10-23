@@ -1,0 +1,163 @@
+<div *ngIf="currentAnimal">
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6">
+                    <img class="card-img-top mb-5 mb-md-0" *ngIf="currentAnimal.mainPhoto"
+                        src={{currentAnimal.mainPhoto.photoUrl}} alt="hasmainphoto" />
+                    <img class="card-img-top mb-5 mb-md-0" *ngIf="!currentAnimal.mainPhoto"
+                        src={{currentAnimal.images[0].photoUrl}} alt="doesn't have" />
+
+                </div>
+                <div class="col-md-6">
+                    <div class="small mb-1">product id: {{currentAnimal.id}}</div>
+                    <h1 class="display-5 fw-bolder">{{currentAnimal.name}}</h1>
+                    <h4>{{currentAnimal.species}}</h4>
+                    <div class="fs-5 mb-5">
+                       
+                        <span>{{currentAnimal.price|currency}}</span>
+                    </div>
+                    <h5>About</h5>
+                    <p>{{currentAnimal.description}}</p>
+                    <h5>Required habitat</h5>
+                    <p>{{currentAnimal.required_Habitat}}</p>
+                   
+            
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+    <!-- additional images section-->
+    <section class="bg-light ">
+        <div class="animal-gallery container">
+            <h2 class="fw-bolder mb-4">Photo Manager</h2>
+
+            <div class="images-container">
+                <div  *ngFor="let pho of currentAnimal.images">
+                    <div class="card border-dark photo-card">
+                        <img class="card-img-top" src={{pho.photoUrl}} alt={{pho.description}}>
+                        <div class="card-body buttonCont">
+                            <button class="btn btn-outline-dark card-button" (click)="DeleteImage(pho.id)"><i
+                                class="fa fa-trash"></i> Delete Photo</button>
+                                
+                            <button class="btn btn-outline-dark"(click)="SetAsMainImage(currentAnimal.id,pho)"><i class="fa fa-image"></i> Set as
+                                Main</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!--file uploader -->
+
+    <div class="container uploader">
+
+
+        <div class="row">
+
+            <div class="col-md-3">
+
+                <h3>Add Photos</h3>
+
+                <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+                    [uploader]="uploader" class="well my-drop-zone">
+                    drag and drop files to here
+                </div>
+
+
+                Multiple
+                <input class ="uploader-control" type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+                
+                Single
+                <input  class ="uploader-control" type="file" ng2FileSelect [uploader]="uploader" />
+            </div>
+
+            <!-- the queue displayer: -->
+            <div class="col-md-9" style="margin-bottom: 40px" *ngIf=" uploader?.queue?.length">
+
+                <h3>Upload queue</h3>
+                <p>Queue length: {{ uploader.queue.length }}</p>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="50%">Name</th>
+                            <th>Size</th>
+                            <th>Progress</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of uploader.queue">
+                            <td><strong>{{ item?.file?.name }}</strong></td>
+                            <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }}
+                                MB</td>
+                            <td *ngIf="uploader.options.isHTML5">
+                                <div class="progress" style="margin-bottom: 0;">
+                                    <div class="progress-bar" role="progressbar"
+                                        [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <span *ngIf="item.isSuccess"><i class="fa fa-ok"></i></span>
+                                <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                                <span *ngIf="item.isError"><i class="fa fa-remove"></i></span>
+                            </td>
+                            <td nowrap>
+                                <button type="button" class="btn btn-success btn-xs" (click)="item.upload()"
+                                    [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                    <span class="fa fa-upload"></span> Upload
+                                </button>
+                                <button type="button" class="btn btn-warning btn-xs" (click)="item.cancel()"
+                                    [disabled]="!item.isUploading">
+                                    <span class="fa fa-ban-"></span> Cancel
+                                </button>
+                                <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
+                                    <span class="fa fa-trash"></span> Remove
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div>
+                    <div>
+                        Queue progress:
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar"
+                                [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()"
+                        [disabled]="!uploader.getNotUploadedItems().length">
+                        <span class="fa fa-upload"></span> Upload all
+                    </button>
+                    <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()"
+                        [disabled]="!uploader.isUploading">
+                        <span class="fa fa-ban-circle"></span> Cancel all
+                    </button>
+                    <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()"
+                        [disabled]="!uploader.queue.length">
+                        <span class="fa fa-trash"></span> Remove all
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <br><br>
+
+
+    </div>
+
+</div>
+
+
+                 
+     
+       

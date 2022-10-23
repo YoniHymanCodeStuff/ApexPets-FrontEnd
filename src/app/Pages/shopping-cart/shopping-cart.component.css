@@ -1,0 +1,28 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding:2rem;
+}
+
+.titleArea{
+    display: flex;
+    justify-content: center;
+    margin-bottom:2rem;
+    
+}
+
+.nav-cards{
+    list-style-type: none;
+    width:85%;
+    
+}
+
+.nav-card{
+    margin-bottom: 1rem;
+}
+
+.checkoutArea{
+    margin-bottom: 100px;
+}

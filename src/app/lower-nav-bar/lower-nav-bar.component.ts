@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-lower-nav-bar',
   templateUrl: './lower-nav-bar.component.html',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LowerNavBarComponent implements OnInit {
 
+  
+
   constructor() { }
 
   ngOnInit(): void {
   }
+
+
+
+
 
 }

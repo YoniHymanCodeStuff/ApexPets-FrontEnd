@@ -1,35 +1,53 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CategoryService } from '../Services/category.service';
-import { ICategory } from '../TemporaryFakeData/IGenus';
 
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+
+import { ToastrService } from 'ngx-toastr';
+import { AccountService } from '../Services/account.service';
+import { take } from 'rxjs';
+import { User } from '../model_Interfaces/User';
 
 @Component({
   selector: 'app-upper-nav-bar',
   templateUrl: './upper-nav-bar.component.html',
-  styleUrls: ['./upper-nav-bar.component.css']
+  styleUrls: ['./upper-nav-bar.component.css'],
+  providers: [{ provide: BsDropdownConfig, useValue: { isAnimated: true, autoClose: true,insideClick:true } }]
+
 })
 export class UpperNavBarComponent implements OnInit {
 
-  categories? : string[]; //prob a string[]
- 
+  categories? : string[]|null; 
+  user :User|null;  
 
-  constructor(private categoryService:CategoryService) { }
 
-  ngOnInit(): void {
+  constructor(private categoryService:CategoryService,
+     private toast:ToastrService, 
+     private accountService:AccountService) { 
+    this.accountService.CurrentUser$.subscribe(u => this.user = u);
+      
+  }
+
+  ngOnInit() {       
     this.GetCategories();
-
-    if(this.categories)
-    {
-    this.categories.forEach(element => {
-      console.log(element)
-    })}
-    else{console.log('nope');}
+    this.categoryService.categories$.subscribe(x=>this.categories = x);
   }
 
 
   GetCategories(){
     this.categoryService.getCategories()
-    .subscribe(result=>this.categories = result);
-  }
+    .subscribe({
+      next:result=>{this.categories = result},
+      error:error=>{console.log(error)}
+      
+    })
+    }
+
+
+    
+
+  
+
 
 }
+

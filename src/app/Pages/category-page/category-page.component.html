@@ -1,7 +1,41 @@
-<ul *ngIf="category">
-    <li *ngFor ="let item of items">
-        <a [routerLink]=[item.Id]>{{item.Id}}. {{item.genus}}</a>
-        <!-- prob there is a way to use
-             routerlink and interact fro parent to child... -->
-    </li>
-</ul>
+<div class="header">
+
+	<h3>{{queryParams.category|titlecase}}</h3>
+</div>
+
+
+	<ul *ngIf="queryParams.category" class="productsGrid">
+
+
+		<li *ngFor="let item of items" class="card border-primary productsGridItem">
+
+			<div class="card" [routerLink]="[itemRoute+item.id]">
+
+				<img *ngIf="item.mainPhoto" src="{{item.mainPhoto.photoUrl}}" class="card-img-top" alt="...">
+				<img *ngIf="!item.mainPhoto && item.images[0]" src="{{item.images[0].photoUrl}}" class="card-img-top"
+					alt="...">
+				<img *ngIf="!item.mainPhoto && !item.images[0]" src="{{demoImg}}" class="card-img-top" alt="...">
+				
+				<div class="card-body">
+
+					<p class="card-text">{{item.name}}</p>
+					<p class="card-text">{{item.price|currency}}</p>
+
+				</div>
+			</div>
+		</li>
+
+
+	</ul>
+
+
+
+<div class="d-flex justify-content-center pagination-container" *ngIf="pagination">
+	<pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+		[(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+		nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+
+	</pagination>
+</div>
+
+<div *ngIf="!pagination">no pagination!</div>

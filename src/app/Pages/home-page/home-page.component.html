@@ -1,1 +1,23 @@
-<p>home-page works!</p>
+<app-carousel-banner></app-carousel-banner>
+
+<div class="logo-crest">
+  <h2>APEX</h2> 
+  <img class="crest-img" src="https://res.cloudinary.com/storage-for-demo-apps/image/upload/v1662037898/constant%20site%20assets/logoWcrest_atkrd3.png">
+  <h2>PETS</h2>
+</div>
+
+<div class="subtitle"><h3>Powerful pets, for powerful people</h3></div>
+
+<div class="cards-holder">
+  <div class="grid-container">
+    <div *ngFor="let cat of categories" class="grid-item">
+      <div class="card">
+        <img src={{cat.url}} class="card-img">
+        <div class="card-img-overlay">
+ 
+          <a [routerLink]="['/animals/'+ cat.title]" class="btn btn-primary">{{cat.title|titlecase}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

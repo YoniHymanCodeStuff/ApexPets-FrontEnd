@@ -1,0 +1,14 @@
+
+
+.caroPic{
+    height:70vh;
+    width: auto;
+    object-fit: cover;
+}
+
+.biglabel{
+    font-size: 200%;
+    font-weight: bold;
+    text-shadow: 2px 2px black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

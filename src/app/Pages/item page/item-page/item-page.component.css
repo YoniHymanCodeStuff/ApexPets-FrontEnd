@@ -1,0 +1,25 @@
+
+
+.images-container{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin-bottom: 100px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.collection-img{
+    flex-grow:1;
+    padding:1rem;
+    min-width: 300px;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+}
+
+.animal-gallery{
+    padding-top: 50px;
+    padding-bottom: 50px;
+}

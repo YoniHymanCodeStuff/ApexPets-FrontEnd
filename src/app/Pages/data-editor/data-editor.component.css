@@ -1,0 +1,23 @@
+.dataHeader{
+    display: flex;
+    margin:20px;
+    justify-content: center;
+}
+
+.newButton{
+    margin:30px;
+}
+
+.info{
+    display: flex;  
+    flex-direction: column;
+    align-items: center;
+    margin:1rem;
+    margin-bottom: 100px;
+}
+
+.info-inner{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}

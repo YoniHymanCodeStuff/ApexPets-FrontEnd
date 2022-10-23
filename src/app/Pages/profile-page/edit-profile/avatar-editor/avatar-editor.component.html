@@ -1,0 +1,16 @@
+<div class="avatar-editor">
+        <img src={{currentUser.avatar.photoUrl}} alt="..." class="overrideAvatar" />
+
+        
+           
+        
+
+        <input type="file" ng2FileSelect [uploader]="uploader"/>
+       
+        <div class="progress">
+                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }">
+                </div>
+        </div>
+
+
+</div>

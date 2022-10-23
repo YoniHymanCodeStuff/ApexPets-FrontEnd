@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Animal } from 'src/app/model_Interfaces/Animal';
 import { CategoryService } from 'src/app/Services/category.service';
-import { ItemService } from 'src/app/Services/item.service';
-// import { IAnimal } from 'src/app/TemporaryFakeData/IAnimal';
-// import { ICategory } from 'src/app/TemporaryFakeData/IGenus';
+import { AnimalService } from 'src/app/Services/Animal.service';
+import { Pagination } from 'src/app/model_Interfaces/Pagination';
+import { filter } from 'rxjs';
+import { AnimalQueryParams } from 'src/app/model_Interfaces/AnimalQueryParams';
+import { AccountService } from 'src/app/Services/account.service';
 
 @Component({
   selector: 'app-category-page',
@@ -12,40 +15,66 @@ import { ItemService } from 'src/app/Services/item.service';
 })
 export class CategoryPageComponent implements OnInit {
 
-  @Input() category?: string ;
-  @Input() items? : any[];
+  demoImg: string = "https://res.cloudinary.com/storage-for-demo-apps/image/upload/v1659357956/output-onlinepngtools_1_f9y8qp.png";
+  items: Animal[];
+  itemRoute: string = "";
+  pagination: Pagination;
+  queryParams: AnimalQueryParams = new AnimalQueryParams();
 
 
-  constructor( private route: ActivatedRoute,
-    private categoryService:CategoryService, private itemService:ItemService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private categoryService: CategoryService,
+    private animalService: AnimalService,
+    private router: Router,
+    private accountService: AccountService) {
+    this.queryParams.itemsPerPage = 6;
+    this.queryParams.pageNumber = 1;
+    this.accountService.CurrentUser$.subscribe(u => { if (u?.isAdmin) this.itemRoute = "edit/" });
+
+  }
 
   ngOnInit(): void {
     this.ChangeCategory();
-    
+    //to refresh the component when category is changed:
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.ChangeCategory();
+      });
   }
 
-  ChangeCategory(){
-    this.route.url.subscribe(url =>{
+  ChangeCategory() {
+
+    this.route.url.subscribe(url => {
       this.GetCategory();
-      this.GetItems();
- });
-  } 
+      this.GetAnimals();
+    });
+  }
 
   GetCategory() {
-    
-    this.category = String(this.route.snapshot.paramMap.get('category-id'));
-
-    // this.categoryService.getCategory(name)
-    // .subscribe(categ => this.category = categ);
-    
+    this.queryParams.category = String(this.route.snapshot.paramMap.get('category-id'));
   }
 
-  GetItems(){
-    if(this.category)
-    {
-    this.itemService.getCategoryItems(this.category)
-      .subscribe(catItems => this.items = catItems);
+  GetAnimals() {
+    if (this.queryParams.category) {
+
+      this.animalService.GetPaginatedAnimals(this.queryParams)
+        .subscribe({
+          next:
+            res => {
+
+              this.pagination = res.pagination;
+              this.items = res.result;
+            },
+        });
+
     }
+  }
+
+  pageChanged({ page }: any) {
+    this.queryParams.pageNumber = page;
+    this.GetAnimals();
   }
 
 }

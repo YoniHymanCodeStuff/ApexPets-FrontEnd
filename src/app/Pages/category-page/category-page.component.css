@@ -1,0 +1,33 @@
+
+.header{
+    text-align: center;
+    margin:1rem;
+}
+
+
+.productsGrid{
+    list-style:none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1rem;
+    padding:2rem;
+    height :100%;
+
+}
+
+
+.productsGridItem{
+        
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.productsGridItem:hover{
+    transform: scale(0.95);
+    transition: transform .2s;
+        
+}
+
+.pagination-container{
+    margin:3rem;
+}

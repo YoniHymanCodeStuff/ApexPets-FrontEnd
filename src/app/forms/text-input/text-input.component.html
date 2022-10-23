@@ -1,0 +1,29 @@
+<div class="form-group, form-outline mb-4">
+    <div class="input-group">
+        <input [class.is-invalid]="ngControl.errors && ngControl.touched" [type]="type" class="form-control"
+            [formControl]="$any(ngControl.control)">
+
+        <div *ngIf="IsPassword" class="input-group-append">
+            <span class="input-group-text">
+                <i class="fa" [ngClass]="{
+        'fa-eye-slash': !fieldTextType,
+        'fa-eye': fieldTextType }"
+        (click)="toggleFieldTextType()"></i>
+            </span>
+        </div>
+
+        <div *ngIf="ngControl.control?.errors?.['required']" class="invalid-feedback">please enter {{label}} </div>
+        <div *ngIf="ngControl.control?.errors?.['minlength']" class="invalid-feedback">{{label}} must be at least
+            {{ngControl.control?.errors?.['minlength']['requiredLength']}} characters long</div>
+        <div *ngIf="ngControl.control?.errors?.['maxlength']" class="invalid-feedback">{{label}} cannot be longer than
+            {{ngControl.control?.errors?.['maxlength']['requiredLength']}} characters long </div>
+        <div *ngIf="ngControl.control?.errors?.['isMatching']" class="invalid-feedback">must match the password </div>
+        <div *ngIf="ngControl.control?.errors?.['email']" class="invalid-feedback">please enter a valid Email address
+        </div>
+
+    </div>
+
+
+    <label class="form-label">{{label}}</label>
+
+</div>

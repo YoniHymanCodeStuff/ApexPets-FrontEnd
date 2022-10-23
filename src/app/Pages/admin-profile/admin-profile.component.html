@@ -1,0 +1,25 @@
+<section class="container">
+
+  <form class="admin-profile card border-primary" *ngIf="admin" #EditProfileForm="ngForm" name="ProfileForm"
+    (ngSubmit)="UpdateAdmin()">
+    <app-avatar-editor [currentUser]="admin"></app-avatar-editor>
+    <h5>{{admin.userName}}</h5>
+
+    <div class="card-body p-4">
+      <h5>Personal Details</h5>
+
+      <div class="col-6 mb-3">
+        <h6>First Name</h6>
+        <input type="text" class="formInput" name="FnameInput" [(ngModel)]="admin.firstName">
+      </div>
+      <div class="col-6 mb-3">
+        <h6>Last Name</h6>
+        <input type="text" class="formInput" name="LnameInput" [(ngModel)]="admin.lastName">
+      </div>
+
+      <h6>Email</h6>
+      <input type="text" class="formInput" name="EmailInput" [(ngModel)]="admin.email">
+    </div>
+    <button class="button-34" role="button" type="submit">Save changes</button>
+  </form>
+</section>

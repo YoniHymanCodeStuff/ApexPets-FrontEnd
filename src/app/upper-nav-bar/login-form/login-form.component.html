@@ -1,0 +1,64 @@
+<!-- no one signed in -->
+<div *ngIf="!(currentUser$ | async)">
+  <div class="btn-group" dropdown>
+    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+      aria-controls="dropdown-basic"> Account <span class="caret"></span>
+    </button>
+    <form #LoginForm="ngForm" (ngSubmit)="Login()">
+      <ul id="dropdown-no-user" *dropdownMenu class="dropdown-menu bg-secondary" role="menu"
+        aria-labelledby="button-animated">
+        <label for="UsernameInput">Username</label>
+        <input type="text" name="UsernameInput" [(ngModel)]="username" class="form-control" id="UsernameInput"
+          placeholder="username">
+        <label for="PasswordInput">Password</label>
+        <input type="password" name="PasswordInput" [(ngModel)]="password" class="form-control" id="PasswordInput"
+          placeholder="Password">
+        <div class="button-holder">
+          <button type="submit" class="btn btn-primary ">Sign in</button>
+        </div>
+        <div class="dropdown-divider"></div>
+        <li class="dropdown-item" routerLink="registration">Create New Account</li>
+      </ul>
+    </form>
+  </div>
+</div>
+
+
+<!-- admin signed in -->
+<div *ngIf="user?.isAdmin">
+  <div class="btn-group" dropdown>
+    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+      aria-controls="dropdown-basic"> Account <span class="caret"></span>
+    </button>
+    <ul id="dropdown-admin" *dropdownMenu class="dropdown-menu bg-secondary" role="menu"
+      aria-labelledby="button-animated">
+      <li role="menuitem"><a class="dropdown-item" routerLink="/admin-profile"><i class="fa fa-user"></i> view
+          profile</a>
+      </li>
+      <div class="button-holder">
+        <button type="button" class="btn btn-success" (click)="Logout()">Log Out</button>
+      </div>
+    </ul>
+  </div>
+</div>
+
+<!-- customer signed in -->
+<div *ngIf="(currentUser$|async) && !(user?.isAdmin)">
+  <div class="btn-group" dropdown>
+    <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+      aria-controls="dropdown-basic"> Account <span class="caret"></span>
+    </button>
+    <ul id="dropdown-customer" *dropdownMenu class="dropdown-menu bg-secondary" role="menu"
+      aria-labelledby="button-animated">
+      <li role="menuitem"><a class="dropdown-item" routerLink="/shopping-cart"><i class="fa fa-shopping-cart fa-lg"></i>
+          Cart</a></li>
+      <li role="menuitem"><a class="dropdown-item" routerLink="/orders"><i class="fa fa-list"></i> my orders</a>
+      </li>
+      <li role="menuitem"><a class="dropdown-item" routerLink="/profile"><i class="fa fa-user"></i> view profile</a>
+      </li>
+      <div class="button-holder">
+        <button type="button" class="btn btn-success" (click)="Logout()">Log Out</button>
+      </div>
+    </ul>
+  </div>
+</div>

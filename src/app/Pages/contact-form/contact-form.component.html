@@ -1,0 +1,27 @@
+<div class="outerCont">
+    <div class="flexCont">
+
+        <h1>contact us</h1>
+
+        <p class="opening-text">
+            Here at Apex Pets, your complete satisfacion is our highest concern. We encourage you to contact us about
+            anything we can do to help you, and we will respond as soon as possible.
+            Thank you for being an Apex Shopper!
+
+        </p>
+
+        <textarea class="user-input" placeholder="Dear Apex Pets..." [(ngModel)]="userInput"></textarea>
+
+        <form class="bottomDiv" [formGroup]="AddFeedbackForm" (ngSubmit)="SendMessage()">
+
+
+            <app-text-input label="Email Address" type="email" placeholder="my email..." class="addressInp"
+                formControlName="email"></app-text-input>
+
+            <button class="btn btn-primary" type="submit"
+                [disabled]="AddFeedbackForm.invalid || userInput === ''">Submit</button>
+
+
+        </form>
+    </div>
+</div>

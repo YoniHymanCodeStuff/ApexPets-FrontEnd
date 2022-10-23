@@ -1,0 +1,86 @@
+<form *ngIf="customer" #EditProfileForm="ngForm" name="ProfileForm" (ngSubmit)="SaveChanges()">
+
+  <div class="container">
+    <div class="card outer-card">
+
+      <div class="left-panel text-white gradient-custom">
+        <app-avatar-editor [currentUser]="customer"></app-avatar-editor>
+        <h4>{{customer.userName|titlecase}}</h4>
+
+        <button class="button-34" role="button" type="submit">Save changes</button>
+
+      </div>
+
+      <div class="right-panel text-white bg-light">
+        <h4>Personal Details</h4>
+        <ul class="personalDetails detailsGrid">
+          <li>
+            <h6>First Name</h6>
+            <input type="text" class="formInput" name="FnameInput" [(ngModel)]="customer.firstName">
+
+          </li>
+          <li>
+            <h6>Last Name</h6>
+            <input type="text" class="formInput" name="LnameInput" [(ngModel)]="customer.lastName">
+
+          </li>
+          <li>
+            <h6>Email</h6>
+            <input type="text" class="formInput" name="EmailInput" [(ngModel)]="customer.email">
+
+          </li>
+          <li>
+            <h6>Phone Number</h6>
+            <input type="text" class="formInput" name="PhoneInput" [(ngModel)]="customer.phoneNumber">
+
+          </li>
+
+        </ul>
+
+        <h4>Shipping Address</h4>
+        <ul class="personalDetails detailsGrid">
+          <li>
+            <h6>Country</h6>
+            <input type="text" class="formInput" name="CountryInput" [(ngModel)]="customer.address.country">
+
+          </li>
+          <li>
+            <h6>City</h6>
+            <input type="text" class="formInput" name="CityInput" [(ngModel)]="customer.address.city">
+
+          </li>
+          <li>
+            <h6>Street</h6>
+            <input type="text" class="formInput" name="StreetInput" [(ngModel)]="customer.address.street">
+
+          </li>
+          <li>
+            <h6>House Number</h6>
+            <input type="text" class="formInput" name="HouseNumInput"
+                        [(ngModel)]="customer.address.houseNumber">
+          </li>
+          <li>
+            <h6>Zip Code</h6>
+            <input type="text" class="formInput" name="ZipInput" [(ngModel)]="customer.address.zip">
+
+          </li>
+
+        </ul>
+
+        <h4>Payment Information</h4>
+        <ul class="detailsGrid">
+          <li>
+            <h6>Credit Card</h6>
+            <input type="text" class="formInput" name="CCInput" [(ngModel)]="customer.creditInfo">
+
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+
+</form>
+

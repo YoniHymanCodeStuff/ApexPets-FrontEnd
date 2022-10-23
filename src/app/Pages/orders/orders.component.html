@@ -1,0 +1,28 @@
+<h4 class="text-center">My Orders</h4>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Order Id</th>
+        <th scope="col">Item Ordered</th>
+        <th scope="col">Item code</th>
+        <th scope="col">Price</th>
+        <th scope="col">Order Date</th>
+        <th scope="col">Order Status</th>
+        <th scope="col">Delivery Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor= "let order of orders?.slice()?.reverse()">
+        <th scope="row">{{order.id}}</th>
+        <td>{{order.orderedAnimalName}}</td>
+        <td>{{order.orderedAnimalId}}</td>
+        <td>{{order.price}}</td>
+        <td>{{order.orderTimeStamp}}</td>
+        <td>{{order.orderStatus}}</td>
+        <td><p *ngIf= "(order.deliveryTimeStamp != ('01/01/0001 00:00')); else tbd">{{order.deliveryTimeStamp}}</p>
+        <ng-template #tbd>-</ng-template></td>
+      </tr>
+
+    </tbody>
+  </table>

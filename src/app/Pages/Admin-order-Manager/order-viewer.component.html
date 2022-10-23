@@ -1,0 +1,72 @@
+<h3 class="text-center">Order Manager</h3>
+
+<div class="input-group">
+  <input #searchBar type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+    aria-describedby="search-addon" (click)="ClearSearch(searchBar.value)" />
+  <button type="button" class="btn btn-outline-primary" (click)="FireSearch(searchBar.value)">search</button>
+</div>
+
+
+<div class="grid">
+  <div>filters:</div>
+  <mat-form-field appearance="fill">
+    <mat-label>Earliest Date</mat-label>
+    <input matInput [matDatepicker]="Earlypicker" [(ngModel)]="queryParams.EarliestDate" (dateChange)="LoadOrders()">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="Earlypicker"></mat-datepicker-toggle>
+    <mat-datepicker #Earlypicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Latest Date</mat-label>
+    <input matInput [matDatepicker]="Latepicker" [(ngModel)]="queryParams.LatestDate" (dateChange)="LoadOrders()">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="Latepicker"></mat-datepicker-toggle>
+    <mat-datepicker #Latepicker></mat-datepicker>
+  </mat-form-field>
+
+</div>
+
+
+<table mat-table [dataSource]="orders" class="table table-striped" matSort (matSortChange)="SortChange($event)">
+  <ng-container *ngFor="let col of tableSchema" [matColumnDef]="col.key">
+
+
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="{{col.label}}">
+      {{col.label}}
+    </th>
+
+
+    <td mat-cell *matCellDef="let element">
+
+
+
+      <div *ngIf="col.key != 'orderStatus'">{{ element[col.key] }}</div>
+
+      <div *ngIf="col.key == 'orderStatus'">
+
+        <div class="btn-group" dropdown>
+          <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+            aria-controls="dropdown-animated">
+            {{element.orderStatus}} <span class="caret"></span>
+          </button>
+          <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-animated">
+            <li role="menuitem" *ngFor="let status of orderStatuses"><a class="dropdown-item"
+                (click)="UpdateStatus(status,element)">{{status}}</a></li>
+
+          </ul>
+        </div>
+
+
+      </div>
+
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<div class="orders-paginator">
+  <mat-paginator *ngIf="pagination" [pageSize]="pagination.itemsPerPage" [length]="pagination.totalItems"
+    [pageIndex]="pagination.currentPage - 1" [pageSizeOptions]="[10,20,30]" (page)="pageChanged($event)">
+  </mat-paginator>
+</div>

@@ -1,0 +1,92 @@
+.gradient-custom {
+    
+    background: #f6d365;
+    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+    }
+
+.button-34 {
+  background: #5E5DF0;
+  border-radius: 999px;
+  box-shadow: #5E5DF0 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+}
+
+.container{
+  width:100%;
+  display: flex;
+  justify-content:center;
+}
+
+.outer-card{
+  display: flex;
+  border-radius: 25px;
+  min-width: 320px;
+  margin:2rem;
+  
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: hidden;
+  margin-bottom: 100px;
+}
+
+.left-panel{
+  
+  display: flex;
+  flex-direction: column;
+  padding:3%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-grow:1;
+}
+
+.avatar{
+  max-width:200px;
+  border-radius: 50%;
+  padding:2%;
+  
+}
+
+.right-panel{
+  
+  display: flex;
+  flex-grow: 2;
+  flex-direction: column; 
+  align-items:center;   
+  padding:1%;
+  padding-top: 2%;
+}
+
+.detailsGrid{
+  list-style: none;
+  display: grid;
+  justify-content:center ;
+  align-items: center;
+  grid-template-columns: repeat(2, minmax(150px, 1fr));
+  padding:3%;
+  gap: 1rem;
+  
+}
+
+.detailsGrid>li{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+
+}

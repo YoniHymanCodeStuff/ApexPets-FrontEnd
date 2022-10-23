@@ -1,0 +1,11 @@
+
+<carousel [isAnimated]="true">
+    <slide  *ngFor="let item of assets">
+      <img class="caroPic" src={{item.url}} alt="slide image"  style="display: block; width: 100%;">
+      <div class="carousel-caption d-none d-md-block">
+        <p class="biglabel">Bring the wildlife into your wild life!</p>
+        <h4> </h4>
+      </div>
+    </slide>
+    
+  </carousel>
